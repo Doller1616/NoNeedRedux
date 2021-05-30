@@ -1,0 +1,22 @@
+.dashboardContainer { 
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 15% 75% 10%;
+    grid-template-areas: "Header Header"
+                         "SideMenu CentOer"
+                         "Footer Footer";
+  }
+  
+  .header {
+     grid-area: Header;
+  }
+  .sideMenu {
+    grid-area: SideMenu;
+  }
+  .center {
+    grid-area: CentOer;
+  }
+  .footer {
+    grid-area: Footer;
+  }
