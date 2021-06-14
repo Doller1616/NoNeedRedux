@@ -1,6 +1,6 @@
 
 
-export function DashboardReducer(state: any, action: any) {
+export function AccountReducer(state: any, action: any) {
 
     switch (action.type) {
         case 'ADD_NAME':
@@ -9,6 +9,8 @@ export function DashboardReducer(state: any, action: any) {
             return { ...state, id: action.id }
         case 'ADD_ADDRESS':
             return { ...state, address: action.address }
+        case 'ADD_CONTENT':
+            return { ...state, content: action.content }
         default:
             return state
     }

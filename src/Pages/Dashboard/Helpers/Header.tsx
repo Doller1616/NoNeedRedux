@@ -4,9 +4,9 @@ import { DashboardContext } from '../Utils/contexts'
 export  function Header(props:any): ReactElement {
     const { state, dispatch } = useContext(DashboardContext)
 
-    useEffect(() => {
-        alert("Address updated Header" + JSON.stringify(state))
-     }, [state.address])
+    // useEffect(() => {
+    //     alert("Address updated Header" + JSON.stringify(state))
+    //  }, [state.address])
 
     return (
         <div>

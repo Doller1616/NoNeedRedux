@@ -6,10 +6,12 @@ const DashboardContextProvider = (props: any) => {
 
     const [state, dispatch] = useReducer<any>(DashboardReducer, {
         id:1,
-        address:"Govindpuram"
+        address:"Govindpuram",
+        name : "Center Content",
+        content : "Any Content"
     });
 
-    return (<div className='dashboardContainer'>
+    return (<div>
         <DashboardContext.Provider value={{ state, dispatch }}>
             {props.children}
         </DashboardContext.Provider>

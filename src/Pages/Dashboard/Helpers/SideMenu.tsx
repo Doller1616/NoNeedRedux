@@ -18,12 +18,18 @@ export default function Sidemenu({ }: any ): ReactElement {
         dispatch({ type: 'ADD_ID', id: 2 })
     }
 
+    const centerContent = () => {
+        dispatch({ type: 'ADD_CONTENT', content: "I am playing Center forword" })
+    }
+
     return (
         <div>
-            MMMMMMMMMMMMMM
-            {/* <br/>
+            <br/>
             <br/>
             <button onClick={name}>Name Cahnge</button>
+            <br/>
+            <br/>
+            <button onClick={centerContent}>Center Cahnge</button>
             <br/>
             <br/>
             <button onClick={header}>Header Cahnge</button>
@@ -33,7 +39,7 @@ export default function Sidemenu({ }: any ): ReactElement {
             <br/>
             <br/>
             <br/>
-             <b>(Dashboard)</b> <div>Name: {state.name}</div> */}
+             <b>(Sidemenu)</b> <div>Name: {state.name}</div>
         </div>
     )
 }
