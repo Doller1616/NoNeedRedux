@@ -1,13 +1,16 @@
 
-export const validateInput = (rules: any, value: any, result: any) => {
-
-    const errorStatus: any = {
-        min: Boolean(rules?.min?.length) && value?.length >= (rules?.min?.length),
-        max: Boolean(rules?.max?.length) && value?.length <= (rules?.max?.length),
-        mandatory: Boolean(rules?.mandatory?.require) && (value.length) !== 0,
-        regex: Boolean(rules?.regex?.reg) && (new RegExp(rules?.regex?.reg).test(value))
+export const validateInput = (props: any, value: any, result: any) => {
+    if(!props) return result();
+    const allRules: any = {
+        min: Boolean(props?.min?.length) && value?.length >= (props?.min?.length),
+        max: Boolean(props?.max?.length) && value?.length <= (props?.max?.length),
+        mandatory: Boolean(props?.mandatory?.require) && (value.length) !== 0,
+        regex: Boolean(props?.regex?.reg) && (new RegExp(props?.regex?.reg).test(value))
     }
-    const data: any = Object.entries(errorStatus).find(([key, value]) => value === false);
-    return (data && rules) ? result(rules[data[0]].msg, errorStatus) : result("", errorStatus);
+
+    const unfollowedRule: any = Object.entries(allRules).find(([key, value]) =>
+        props?.hasOwnProperty([key]) && value === false);
+    
+    return unfollowedRule ? result(props[unfollowedRule[0]]?.msg,false) : result();
 
 }

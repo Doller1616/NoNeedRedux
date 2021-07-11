@@ -10,10 +10,12 @@ const defaultProps = {
     heading: "",
     placeholder: "",
     classes: "",
-    min: { length: null, msg: "" },
-    max: { length: null, msg: "" },
-    regex: { reg: null, msg: "" },
-    mandatory: { require: false, msg: "" },
+
+    // min: { length: null, msg: "" },
+    // max: { length: null, msg: "" },
+    // regex: { reg: null, msg: "" },
+    // mandatory: { require: false, msg: "" },
+
     // isEnable: true
     // depend_on: ["dobId"],
 }
@@ -33,16 +35,16 @@ const InputBox: any = memo((props: any) => {
     useEffect(() => {
         // Add Values and Validations
         dispatch({ "FIELDS_VALUES": { [uniqueId]: props?.defaultValue } })
-        validateInput(null, null, resultCb);
     }, [])
 
     useEffect(() => {
-        value && validateInput(props, value, resultCb);
+        validateInput(props, value, resultCb);
     }, [value])
 
-    const resultCb = (msg = "", errorStatus = {}) => {
+    const resultCb = (msg = "", errorStatus = true) => {
         setErrorMsg(msg)
-        dispatch({ "ARE_FIELDS_VALID": { [uniqueId]: errorStatus } });
+        const status = errorStatus ? 'REMOVE_FIELDS_VALID' : 'ARE_FIELDS_VALID'
+        dispatch({ [status] : { [uniqueId]: errorStatus } });
     }
 
     useEffect(() => {

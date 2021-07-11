@@ -24,9 +24,9 @@ export const FormConfig = {
             type: "text",
             defaultValue: "101",
             classes: "",
-            heading: "",
+            heading: "User Name",
             placeholder: "User Name",
-            mandatory: { require: false, msg: "" },
+            mandatory: { require: true, msg: "This Field is Required" },
             depend_on: [],
 
         },
