@@ -1,9 +1,11 @@
 import React, { lazy, Suspense } from 'react'
 import './App.css'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-const DashboardModule = lazy(() => import('./Pages/Dashboard/dashboard.module'))
-const AccountModule = lazy(() => import('./Pages/Account/account.module'))
-const SignUpSignInModule = lazy(() => import('./Pages/SignUpSignIn/signupsignin.module'))
+import { BrowserRouter, Route } from 'react-router-dom'
+
+const DashboardModule = lazy(() => import('@Pages/Dashboard/dashboard.routing'))
+const AccountModule = lazy(() => import('@Pages/Account/account.routing'))
+const SignUpSignInModule = lazy(() => import('@Pages/SignUpSignIn/signupsignin.routing'))
+
 function App() {
 
   return (

@@ -1,5 +1,6 @@
 {
   "name": "vite-project",
+  "main": "src/main.tsx",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -10,7 +11,8 @@
     "@types/react-router-dom": "^5.1.7",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "vite-tsconfig-paths": "^3.3.17"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
