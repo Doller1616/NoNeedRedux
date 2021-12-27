@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from 'react'
-import { DashboardContext } from '../Utils/contexts'
+import { DashboardContext } from '../Pages/Dashboard/Utils/contexts'
 
 
 export default function Sidemenu({ }: any ): ReactElement {

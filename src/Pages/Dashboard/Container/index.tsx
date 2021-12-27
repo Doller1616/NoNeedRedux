@@ -1,8 +1,8 @@
 import React, { ReactElement, useContext } from 'react'
 import DashboardContextProvider from '../Utils/contexts'
-import SideMenu from '../Helpers/SideMenu'
-import { Header } from '../Helpers/Header'
-import { Footer } from '../Helpers/Footer'
+import SideMenu from '../../../Widgits/SideMenu'
+import { Header } from '../../../Widgits/Header'
+import { Footer } from '../../../Widgits/Footer'
 import { CenterContainer } from '../Helpers/CenterContainer'
 import './stylr.css'
 

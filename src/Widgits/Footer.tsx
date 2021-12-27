@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext, useEffect } from 'react'
-import { DashboardContext } from '../Utils/contexts'
+import { DashboardContext } from '../Pages/Dashboard/Utils/contexts'
 
 export function Footer(props:any): ReactElement {
     const { state, dispatch } = useContext(DashboardContext)

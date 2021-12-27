@@ -1,17 +1,23 @@
-import React, { ReactElement, useContext } from 'react'
-import { DashboardContext } from '../Utils/contexts'
-import Form from '../../../Widgits/Form'
-import { FormConfig } from './Templates'
+import React, { ReactElement } from 'react'
+import DyForm from '../../../Widgits/dyForm'
+import { InputBox } from '../../../Elements/index'
+import { admissionForm } from '../../../Widgits/dyForm/sample'
+
 export function CenterContainer({ }: any ): ReactElement {
 
-    const { state, dispatch } = useContext(DashboardContext)
+const handleOnChange = (e?:React.ChangeEvent<HTMLInputElement>) =>{
+     console.log('data',e);
+     
+}
 
     return (
         <div>
-             <b>(Center)</b> <div>{state.content}</div>
-
-             <Form {...FormConfig} />
-
+            <DyForm elementsObj={admissionForm}>
+                    <InputBox 
+                     type="text" 
+                     value="Tanaya"
+                     onChange={handleOnChange} />
+                </DyForm>
         </div>
     )
 }
