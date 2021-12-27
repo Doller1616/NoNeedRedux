@@ -15,7 +15,4 @@ export function AccountReducer(state: any, action: any) {
             return state
     }
 
-
-
-
 }

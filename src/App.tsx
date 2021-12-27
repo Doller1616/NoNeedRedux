@@ -2,9 +2,9 @@ import React, { lazy, Suspense } from 'react'
 import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-const DashboardModule = lazy(() => import('./Pages/Dashboard/dashboard.routing'))
-const AccountModule = lazy(() => import('./Pages/Account/account.routing'))
-const SignUpSignInModule = lazy(() => import('./Pages/SignUpSignIn/signupsignin.routing'))
+const DashboardModule = lazy(() => import('@Pages/Dashboard/dashboard.routing'))
+const AccountModule = lazy(() => import('@Pages/Account/account.routing'))
+const SignUpSignInModule = lazy(() => import('@Pages/SignUpSignIn/signupsignin.routing'))
 
 function App() {
 
