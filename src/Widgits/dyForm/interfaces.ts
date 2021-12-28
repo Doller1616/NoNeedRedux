@@ -1,9 +1,9 @@
-import { FormEvent } from "react";
 
 export interface FormProps {
 
     elementsObj?:[{
         tag: 'INPUTBOX' | 'CHECKBOX' | 'DATEPICKER' | 'DATERANGEPICKER' | 'RADIO',
+        name: string,
         label?:string,
         placeholder?:string,
         type?:'number' | 'text',
@@ -18,11 +18,11 @@ export interface FormProps {
             minWords?: number,
             required?: true | false
         },
-        onChange?:(e?:InputEvent)=> any   
+        onChange?:(e?:any)=> any   
     }],
     children?: any,
-    onSubmit?:(e?:FormEvent)=> any, 
-    onReset?:(e?:FormEvent)=> any, 
-    onCancel?:(e?:FormEvent)=> any
+    onSubmit?:(e?:any)=> null, 
+    onReset?:(e?:any)=> null, 
+    onCancel?:(e?:any)=> null
 
 }

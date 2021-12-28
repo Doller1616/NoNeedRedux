@@ -1,6 +1,7 @@
 
 export interface InputBoxProps {
-    tag: 'INPUTBOX',
+    tag:string,
+    name?:string,
     label?: string,
     value?: string,
     placeholder?: string,

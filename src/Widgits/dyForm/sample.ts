@@ -2,6 +2,7 @@ export const admissionForm: any = [
     {
         tag: "INPUTBOX",
         label: "Age",
+        name : "age",
         placeholder: "Enter Age",
         type: "number",
         refId: "ageRef",
@@ -10,19 +11,18 @@ export const admissionForm: any = [
         disabled: false,
         validate: {
             min: 25,
-            max: 100,
+            max: 55,
             maxWords: 5,
             minWords: 2,
             required: true
         },
-        onChange: (e: any) => { 
-            console.log("Age",e);  
-        }
+        onChange: (e: any) => {}
 
     },
     {
         tag: "INPUTBOX",
         label: "DATE OF BIRTH",
+        name : "dob",
         placeholder: "Enter DOB",
         type: "number",
         refId: "dobRef",
@@ -30,15 +30,13 @@ export const admissionForm: any = [
         dependOnRefId: "ageRef",
         disabled: false,
         validate: {
-            min: 25,
-            max: 100,
+            min: 20,
+            max: 50,
             maxWords: 5,
             minWords: 2,
             required: true
         },
-        onChange: (e: any) => { 
-            console.log("DOB",e);  
-        }
+        onChange: (e: any) => {}
 
     }
 ]
