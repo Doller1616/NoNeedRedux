@@ -18,7 +18,7 @@ const defaultProps = {
         max: null,
         maxWords: null,
         minWords: null,
-        required: true
+        required: false
     },
     onChange: () => null
 }

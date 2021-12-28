@@ -16,6 +16,9 @@ const handleOnChange = (e?:React.ChangeEvent<HTMLInputElement>) =>{
                     <InputBox 
                      type="text" 
                      value="Tanaya"
+                     validate={{
+                         required:true
+                     }}
                      onChange={handleOnChange} />
                 </DyForm>
         </div>
