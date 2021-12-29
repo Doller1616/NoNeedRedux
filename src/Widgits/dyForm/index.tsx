@@ -1,12 +1,12 @@
-import React, { ReactElement, createContext, useReducer, useEffect } from 'react'
+import React, { ReactElement, createContext, useReducer, useEffect, useState } from 'react'
 import Elements from './elements'
 import { FormProps } from './interfaces';
 export const formContext: any = createContext({});
 
-// export const dependOnListener = (detail: { refId: string, data: any }) => {
-//     const event: any = new CustomEvent('dependOn', { detail });
-//     document.dispatchEvent(event);
-// }
+export const dependOnListener = (detail: { refId: string, data: any }) => {
+    const event: any = new CustomEvent('dependOn', { detail });
+    document.dispatchEvent(event);
+}
 
 const defaultProps = {
     elementsObj: [],
@@ -16,13 +16,13 @@ const defaultProps = {
 
 function DyForm(props: FormProps): ReactElement {
 
-    const { elementsObj = [], onSubmit }: any = props;
+    const [formDetails, setFormDetails]:any = useState(props?.elementsObj || [])
     const [state, setFormData]: any = useReducer((state: any, action: any) => (
         { ...state, ...action }
     ), {});
 
     useEffect(() => {
-        const initilize = elementsObj.reduce((acc: any, eleProp: any) => {
+        const initilize = formDetails.reduce((acc: any, eleProp: any) => {
             const { name, label, placeholder, value } = eleProp;
             const key = name || label || placeholder || 'no_name';
             const isValidOrNot = value?.toString() ? [null, true] : [null, false];
@@ -33,27 +33,27 @@ function DyForm(props: FormProps): ReactElement {
 
 
         /* Depend On Event Listener */
-        // document.addEventListener('dependOn', (e?: any) => {
-            // const { refId, data } = e.detail;
-            // const newData:any = JSON.parse(JSON.stringify(formDetails));
-            // const index: any = newData.findIndex((detail: any) => detail?.refId === refId);
-            // newData[index].value = data;
-            // setTimeout(() => {
-            //     setFormDetails(newData);
-            // }, 3000);
-    
-        // });
+        document.addEventListener('dependOn', (e?: any) => {
+            setFormDetails([]); //clear form fields
+            setTimeout(()=>dependOnUpdateForm(e.detail)); // setUpdated fields
+        });
 
-       
+
     }, [])
 
-
+    const dependOnUpdateForm = (details:any) => {
+        const { refId, data } = details;
+        const clone:any = Object.assign([], formDetails);
+        const index: any = clone.findIndex((detail: any) => detail?.refId === refId);
+        clone[index].value = data;
+        setFormDetails(clone);
+    }
 
     const handleOnSubmit = (e?: any) => {
         e?.preventDefault();
         console.log(">>>>>>>>>>>>>>", state);
 
-        onSubmit({ state });
+        props?.onSubmit({ state });
     }
 
     const isFormValid = () => {
@@ -65,7 +65,7 @@ function DyForm(props: FormProps): ReactElement {
     return (<formContext.Provider value={[state, setFormData]}>
         <form onSubmit={handleOnSubmit}>
 
-            { elementsObj?.map((details: any, i: number) =>
+            { formDetails?.map((details: any, i: number) =>
                 <Elements {...{ details }} key={i + 'ele'} />) }
 
             {props?.children}

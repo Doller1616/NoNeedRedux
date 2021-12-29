@@ -21,8 +21,8 @@ export interface FormProps {
         onChange?:(e?:any)=> any   
     }],
     children?: any,
-    onSubmit?:(e?:any)=> null, 
-    onReset?:(e?:any)=> null, 
-    onCancel?:(e?:any)=> null
+    onSubmit?: any, 
+    onReset?: any, 
+    onCancel?: any
 
 }

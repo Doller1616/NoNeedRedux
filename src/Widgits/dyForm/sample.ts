@@ -1,3 +1,4 @@
+import { dependOnListener } from './index'
 export const admissionForm: any = [
     {
         tag: "INPUTBOX",
@@ -17,7 +18,9 @@ export const admissionForm: any = [
             minWords: 2,
             required: true
         },
-        onChange: (e: any) => {}
+        onChange: (e: any) => {
+            dependOnListener({refId:'dobRef',data:(e.target.value)*2})
+        }
 
     },
     {
