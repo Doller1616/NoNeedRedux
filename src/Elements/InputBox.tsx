@@ -11,7 +11,6 @@ const defaultProps = {
     type: "text",
     className: "",
     refId: null,
-    dependOnRefId: null,
     disabled: false,
     validate: {
         min: null,
@@ -26,15 +25,16 @@ const defaultProps = {
 function InputBox(props: InputBoxProps): ReactElement {
 
     const [,setFormData]: any = useContext(formContext);
+    const [pro, setPro]:any = useState(props) 
     const { type, placeholder, className, disabled, label,
-        onChange, refId, dependOnRefId, value, name, validate } = props;
+        onChange, refId, value, name, validate } = pro;
     const [val, setVal] = useState<any>(value);
     const [error, setError] = useState('');
 
     const handleOnChange = (event?: ChangeEvent<HTMLInputElement>) => {
-        const dependOnEle: any = dependOnRefId && document.getElementById(dependOnRefId);
+
         setVal(event?.target.value);
-        onChange({ event, dependOnEle });
+        onChange(event);
 
         isValidInput(event?.target.value);
     }
