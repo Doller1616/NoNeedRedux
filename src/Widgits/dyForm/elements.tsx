@@ -3,24 +3,24 @@ import InputBox from '../../Elements/InputBox'
 
 interface Props {
     details?: any,
-    id?: number
+    index: number
 }
 
 const defaultProps = {
     details: {
         tag: 'INPUTBOX'
     },
-    id: 12345
+    index: 1234
 }
 
-function Elements({ details }: Props): ReactElement {
+function Elements({ details,index }: Props): ReactElement {
     const { tag, ...rest } = details;
 
     switch (tag) {
         case 'INPUTBOX':
-            return <InputBox {...rest} />
+            return <InputBox {...rest} dataIndex={index} />
         default:
-            return <InputBox {...rest} />
+            return <InputBox {...rest} dataIndex={index}/>
     }
 
 }

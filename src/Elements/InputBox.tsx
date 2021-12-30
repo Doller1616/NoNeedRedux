@@ -6,7 +6,7 @@ const defaultProps = {
     tag: "INPUTBOX",
     label: "",
     name: "no_name",
-    value: "",
+    value: null,
     placeholder: "Place this",
     type: "text",
     className: "",
@@ -19,15 +19,15 @@ const defaultProps = {
         minWords: null,
         required: false
     },
-    onChange: () => null
+    onChange: () => null,
+    dataIndex: 0
 }
 
-function InputBox(props: InputBoxProps): ReactElement {
+function InputBox({ dataIndex ,...props }: InputBoxProps): ReactElement {
 
-    const [,setFormData]: any = useContext(formContext);
-    const [pro, setPro]:any = useState(props) 
+    const [state,setFormData]: any = useContext(formContext);
     const { type, placeholder, className, disabled, label,
-        onChange, refId, value, name, validate } = pro;
+        onChange, refId, value, name, validate } = props;
     const [val, setVal] = useState<any>(value);
     const [error, setError] = useState('');
 
@@ -39,9 +39,15 @@ function InputBox(props: InputBoxProps): ReactElement {
         isValidInput(event?.target.value);
     }
 
+    useEffect(() => {     
+        setVal(value);
+        isValidInput(value?.toString());
+    }, [value])
+
     const isValidInput = (value = '') => {
         const { min, max, maxWords, minWords, required }: any = validate;
-        const key = name || label || placeholder || 'no_name';
+        const clone = Object.assign([],state);
+
         let errMsg = '';
         if (required && value.length === 0)
              errMsg ='Required Field';
@@ -55,12 +61,15 @@ function InputBox(props: InputBoxProps): ReactElement {
              errMsg =`Maximum length is ${maxWords}`;
         if(!errMsg) {
             /* Form Config */
-            setFormData({ [key]: [ value, true] });
+            clone[dataIndex || 0].value = value;
+            clone[dataIndex || 0].isValid = true
+            setFormData(clone);
             setError(errMsg);
             return;
         }
         setError(errMsg);
-        setFormData({ [key]: [ value, false] })
+        clone[dataIndex || 0].isValid = false
+        setFormData(clone);
     }
 
 

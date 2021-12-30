@@ -10,17 +10,22 @@ const handleOnChange = (e?:React.ChangeEvent<HTMLInputElement>) =>{
      
 }
 
+const onSubmitForm = (e:any) =>{
+    console.log("OOOoooo",e);
+    
+}
     return (
         <div>
-            <DyForm elementsObj={admissionForm}>
-                    <InputBox 
+            <DyForm elementsObj={admissionForm} onSubmit={onSubmitForm}>
+                    
+                </DyForm>
+                {/* <InputBox 
                      type="text" 
                      value="Tanaya"
                      validate={{
                          required:true
                      }}
-                     onChange={handleOnChange} />
-                </DyForm>
+                     onChange={handleOnChange} /> */}
         </div>
     )
 }

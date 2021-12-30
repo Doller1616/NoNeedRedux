@@ -3,7 +3,7 @@ export interface InputBoxProps {
     tag:string,
     name?:string,
     label?: string,
-    value?: string,
+    value?: string | number,
     placeholder?: string,
     type?: 'number' | 'text',
     refId?: string,
@@ -17,5 +17,6 @@ export interface InputBoxProps {
         minWords?: number,
         required?: true | false
     },
-    onChange? : any
+    onChange? : any,
+    dataIndex? : number //form dataList index of the object 
 }

@@ -16,64 +16,58 @@ const defaultProps = {
 
 function DyForm(props: FormProps): ReactElement {
 
-    const [formDetails, setFormDetails]:any = useState(props?.elementsObj || [])
-    const [state, setFormData]: any = useReducer((state: any, action: any) => (
-        { ...state, ...action }
-    ), {});
+    const [state, setFormData]: any = useState(props?.elementsObj);
+    const [isFormInvalid, setIsFormInvalid]:any = useState(true);
 
     useEffect(() => {
-        const initilize = formDetails.reduce((acc: any, eleProp: any) => {
-            const { name, label, placeholder, value } = eleProp;
-            const key = name || label || placeholder || 'no_name';
-            const isValidOrNot = value?.toString() ? [null, true] : [null, false];
-            return  { ...acc, [key]: isValidOrNot };
-        }, {});
+       const initilize = props?.elementsObj?.reduce((acc: any, eleProps: any) => {
+            if(eleProps?.value?.toString())
+                eleProps.isValid = true; 
+            else
+                eleProps.isValid = false;  
+            
+            return  [...acc, eleProps ];
+        }, []);
 
         setFormData(initilize);
 
 
         /* Depend On Event Listener */
         document.addEventListener('dependOn', (e?: any) => {
-            setFormDetails([]); //clear form fields
-            setTimeout(()=>dependOnUpdateForm(e.detail)); // setUpdated fields
+            dependOnUpdateForm(e.detail)
         });
-
-
     }, [])
+
+    useEffect(() => {
+        const isValid = state.some((prop:any)=> !prop.isValid );
+        setIsFormInvalid(isValid);
+    }, [state])
 
     const dependOnUpdateForm = (details:any) => {
         const { refId, data } = details;
-        const clone:any = Object.assign([], formDetails);
-        const index: any = clone.findIndex((detail: any) => detail?.refId === refId);
-        clone[index].value = data;
-        setFormDetails(clone);
+        const clone:any = Object.assign([], state);
+        const elementDetail: any = clone.find((detail: any) => detail?.refId === refId);
+        elementDetail.value = data;
+        setFormData(clone);
     }
 
     const handleOnSubmit = (e?: any) => {
         e?.preventDefault();
-        console.log(">>>>>>>>>>>>>>", state);
-
         props?.onSubmit({ state });
     }
-
-    const isFormValid = () => {
-        const isValid = Object.values(state).flat() || [];
-        return isValid.includes(false);
-    }
-
 
     return (<formContext.Provider value={[state, setFormData]}>
         <form onSubmit={handleOnSubmit}>
 
-            { formDetails?.map((details: any, i: number) =>
-                <Elements {...{ details }} key={i + 'ele'} />) }
+            { state?.length && state?.map((details: any, i: number) =>
+                <Elements {...{ details }} index={i} key={i+'ele'}/>) }
 
             {props?.children}
 
             <button
                 type='submit'
-                className={isFormValid() ? 'cursor-no-drop' : ''}
-                disabled={isFormValid()}>Save</button>
+                className={isFormInvalid ? 'cursor-no-drop' : ''}
+                disabled={isFormInvalid}>Save</button>
 
         </form>
     </formContext.Provider>)

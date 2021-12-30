@@ -14,8 +14,8 @@ export const admissionForm: any = [
         validate: {
             min: 25,
             max: 55,
-            maxWords: 5,
-            minWords: 2,
+            maxWords: 4,
+            minWords: 1,
             required: true
         },
         onChange: (e: any) => {
@@ -33,7 +33,7 @@ export const admissionForm: any = [
         refId: "dobRef",
         className: "",
         dependOnRefId: "ageRef",
-        disabled: false,
+        disabled: true,
         validate: {
             min: 20,
             max: 50,
