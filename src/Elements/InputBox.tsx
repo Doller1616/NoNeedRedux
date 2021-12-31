@@ -39,10 +39,19 @@ function InputBox({ dataIndex ,...props }: InputBoxProps): ReactElement {
         isValidInput(event?.target.value);
     }
 
-    useEffect(() => {     
-        setVal(value);
-        isValidInput(value?.toString());
-    }, [value])
+    useEffect(() => { 
+
+    //***** */ Depend on listener * *****//
+    document.addEventListener('dependOn',(e:any)=>{
+        const { refId, data } = e.detail;
+
+        if(props?.refId === refId) {
+          setVal(data);
+          isValidInput(data?.toString());
+        }
+    });
+
+    }, [])
 
     const isValidInput = (value = '') => {
         const { min, max, maxWords, minWords, required }: any = validate;
